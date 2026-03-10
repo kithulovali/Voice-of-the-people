@@ -1,39 +1,62 @@
-### server side implimentation , installation and contribution design .
 
-<h3>Installation</h3>
-<hr>
-Clone the remote repositorie to your local computer .
-git clone 
-<hr>
- <h3>Downlaod the python interpriter</h3> 
- 
- [Python](https://www.python.org/downloads/)
- Python version used 3.13.5
+# Server-Side Implementation, Installation, and Contribution Guide
 
- <hr>
+## Installation
+```
+1. **Clone the Repository**
 
- <h3> Create a virtual environment</h3> 
+```bash
+git clone https://github.com/Bucosa-IT/Voice-of-the-people.git
+```
 
- 
- '''
- python -m venv .venv  # windows
- ''' 
- <br>
- """
- python3 -m venv .venv  # linux , Macos
- """
+Alternatively, you can fork the repository and clone your forked copy.
 
- <h3>Activate the virtual environment</h3>
- """ source .venv/Scripts/activate  # windows """
- <br>
- """ source .venv/bin/activate      # Linux , Macos """
+2. **Download Python Interpreter**
 
- <h3>Used libraries</h3>
- <ul>
-   <li>sqlalchemy</li>
-   <li>fastapi</li>
- </ul>
+Ensure Python is installed on your system:
 
- <h3>Install the required packages<h3> 
+- [Download Python](https://www.python.org/downloads/)
+- **Python version used:** 3.13.5
 
- """ pip install fastapi[standard] sqlalchemy """
+3. **Create a Virtual Environment**
+
+- On Windows:
+
+```cmd /poweshell
+python -m venv .venv
+```
+
+- On Linux and macOS:
+
+```bash
+python3 -m venv .venv
+```
+
+4. **Activate the Virtual Environment**
+
+- On Windows:
+
+```cmd /powershell
+source .venv/Scripts/activate
+```
+
+- On Linux and macOS:
+
+```bash
+source .venv/bin/activate
+```
+
+5. **Install Required Libraries**
+
+Install the necessary dependencies:
+
+```terminal
+pip install fastapi[standard] sqlalchemy
+```
+
+---
+
+
+
+Feel free to customize further or add more sections as needed!
+```
