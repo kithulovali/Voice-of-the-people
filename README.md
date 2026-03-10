@@ -53,10 +53,3 @@ Install the necessary dependencies:
 ```terminal
 pip install fastapi[standard] sqlalchemy
 ```
-
----
-
-
-
-Feel free to customize further or add more sections as needed!
-```
