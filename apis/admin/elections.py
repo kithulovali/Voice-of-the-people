@@ -58,7 +58,7 @@ async def updating_a_election(election_id:int ,updated_data:UpdateElection,sessi
     else :
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail ="election to update not found ")
     session.commit()
-    session.refresh()
+    session.refresh(updated_election)
     session.close() 
     return updated_election
 

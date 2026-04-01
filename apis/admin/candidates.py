@@ -22,8 +22,9 @@ async def create_a_candidate(new_candidate : CreateCandidate ,session:Session =D
     
     session.add(created_candidate)
     session.commit()
-    session.refresh()
+    session.refresh(created_candidate)
     session.close() 
+    return created_candidate
 
 @router.get("/{candidate_id}",response_model=ReadCandidate)
 async def search_a_user(candidate_id:int ,session:Session=Depends(get_connection)):
@@ -40,19 +41,26 @@ async def delete_a_candidate(candidate_id:int ,session:Session=Depends(get_conne
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND , detail="user to delete not found ")
     
     session.delete(deleted_candidate)
+    session.commit()
     session.close()
     return deleted_candidate 
 
-@router.patch("/{candidate_id}",response_model =ReadCandidate)
-async def update_a_candidate(candidate_id:int,updated_data:UpdateCandidate ,session:Session =Depends(get_connection)): 
-    updated_candidate = session.query(Candidate).filter(Candidate.id ==candidate_id).first()
-    if not updated_candidate : 
-     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail = "candidate not found") 
-    
-    updated_candidate.name = updated_data.name
-    updated_candidate.description = updated_data.description 
-    updated_candidate.image_url =updated_data.image_url 
+@router.patch("/{candidate_id}", response_model=ReadCandidate)
+async def update_a_candidate(
+    candidate_id: int,
+    updated_data: UpdateCandidate,
+    session: Session = Depends(get_connection)
+):
+    candidate = session.query(Candidate).filter(Candidate.id == candidate_id).first()
+    if not candidate:
+        raise HTTPException(status_code=404, detail="Candidate not found")
+
+    for key, value in updated_data.dict(exclude_unset=True).items():
+        setattr(candidate, key, value)
+
+    session.commit()
+    session.refresh(candidate)
     session.close()
-    return updated_candidate
     
-    
+    return candidate
+

@@ -25,6 +25,7 @@ async def delete_a_user(user_id:int , session:Session =Depends(get_connection)):
      if not deleted_user : 
           raise HTTPException(status_code=status.HTTP_404_NOT_FOUND ,detail= "user not found")
      session.delete(deleted_user)
+     session.commit()
      session.close()
      return deleted_user 
 
@@ -42,11 +43,11 @@ async def update_a_user(user_id:int,updated_data:UpdateUser,session:Session=Depe
      updated_user = session.query(User).filter(User.id == user_id).first()
      if not updated_user : 
           raise HTTPException(status_code= status.HTTP_404_NOT_FOUND,detail="no user found ")
-     updated_user.name = UpdateUser.name 
+     updated_user.name = updated_data.name 
      updated_user.password = updated_data.password
      updated_user.reg_number = updated_data.reg_number 
 
      session.commit()
-     session.refresh()
+     session.refresh(updated_user)
      session.close()
      return updated_user

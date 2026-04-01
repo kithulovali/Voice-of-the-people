@@ -25,7 +25,7 @@ class ReadCandidate(BaseModel):
     description:str
     image_url :str 
     created_by :str 
-    created_at :str 
+    created_at :datetime
 
 class CreateUser(BaseModel):
     name :str 
@@ -51,9 +51,10 @@ class UpdateUser(BaseModel):
     reg_number :str  | None =None
 
 class UpdateCandidate(BaseModel):
-    name :str | None =None
-    description:str  | None =None
-    image_url :str | None =None 
+    name : str | None =None
+    description:str | None =None
+    image_url :str  | None =None
+    created_by :str | None =None
 
 
 class UpdateElection(BaseModel):

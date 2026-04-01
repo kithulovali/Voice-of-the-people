@@ -56,7 +56,7 @@ class Election(Model):
     created_by:Mapped[str] =mapped_column(ForeignKey("Users.name")) 
     created_at:Mapped[datetime]=mapped_column(DateTime(timezone.utc),server_default=func.now())
 
-    candidates:Mapped[list["Candidate"]] = relationship(back_populates="elections") 
+    candidates:Mapped[list["Candidate"]] = relationship(back_populates="election") 
     creator:Mapped["User"] = relationship(back_populates="elections")
 
 
